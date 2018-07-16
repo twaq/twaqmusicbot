@@ -5,10 +5,8 @@ client.on('ready', () => {
     console.log('I am ready!');
 });
 
-const client = new Discord.Client({disableEveryone: true})
-client.on('ready', ()=> {
-    console.log('Ready!')
-})
+
+
  Music.start(client, {
     prefix: "!", // البرفكس هنا
     youtubeKey: 'AIzaSyDIv8O9OwZdoTaghK3_SQmyGcQFzkXMW6E', //هنا ال yt v3 api key
@@ -30,6 +28,5 @@ client.on('ready', ()=> {
     loopCmd: 'loop', // امر الاعادة
     enableQueueStat: true,
   });
-
 
 client.login(process.env.BOT_TOKEN);
