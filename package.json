@@ -17,6 +17,7 @@
     "ffmpeg-binaries": "^3.2.2-3",
     "fs": "^0.0.2",
     "prism-media": "^0.3.1",
+    "miniget": "^1.2.0",
     "get-youtube-id": "^1.0.0",
     "jimp": "^0.2.28",
     "node-opus": "^0.3.0",
