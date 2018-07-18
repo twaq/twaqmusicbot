@@ -252,4 +252,21 @@ ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
    }
    }); 
 
+ client.on('message' , message => {
+
+    if (message.content === ".دعوه") {
+        if(!message.channel.guild) return message.reply('**الآمر فقط في السيرفرات**');
+     const embed = new Discord.RichEmbed()
+ .setColor("RANDOM")
+ .setThumbnail(client.user.avatarURL)     
+ .setDescription("Add me" + `
+ **
+رابط البوت | https://discordapp.com/api/oauth2/authorize?client_id=429761300823015425&permissions=120978497&scope=bot
+ **
+`);
+  message.author.sendEmbed(embed);
+   }
+});
+
+
 client.login(process.env.BOT_TOKEN); 
