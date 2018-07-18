@@ -36,6 +36,8 @@ client.on('message', async msg => {
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 	if (command === `شغل`) {
+		let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
 		const voiceChannel = msg.member.voiceChannel;
 		if (!voiceChannel) return msg.channel.send('يجب ان تكون في روم صوتي .');
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
@@ -96,6 +98,8 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 			return handleVideo(video, msg, voiceChannel);
 		}
 	} else if (command === `تخطي`) {
+		let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
 		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
 		if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لتجآوزه');
 		serverQueue.connection.dispatcher.end('تم تجآوز هذآ المقطع');
@@ -107,6 +111,8 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 		serverQueue.connection.dispatcher.end('تم الايقاف');
 		return undefined;
 	} else if (command === `صوت`) {
+		let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
 		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
 		if (!serverQueue) return msg.channel.send('لا يوجد شيء شغآل.');
 		if (!args[1]) return msg.channel.send(`:loud_sound: مستوى الصوت **${serverQueue.volume}**`);
@@ -119,6 +125,8 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 	.setDescription(`:notes: الان يتم تشغيل : **${serverQueue.songs[0].title}**`)
 		return msg.channel.sendEmbed(embedNP);
 	} else if (command === `قائمه`) {
+		let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
 		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
 		let index = 0;
 		const embedqu = new Discord.RichEmbed()
@@ -127,6 +135,8 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 **الان يتم تشغيل** ${serverQueue.songs[0].title}`)
 		return msg.channel.sendEmbed(embedqu);
 	} else if (command === `ايقاف`) {
+		let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
@@ -134,6 +144,8 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 		}
 		return msg.channel.send('لا يوجد شيء حالي ف العمل.');
 	} else if (command === "كمل") {
+		let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
@@ -213,24 +225,50 @@ client.on('message', message => {
     if (!devs.includes(message.author.id)) return;
     
 if (message.content.startsWith(adminprefix + 'setgame')) {
+	let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
   client.user.setGame(argresult);
     message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
 } else 
   if (message.content.startsWith(adminprefix + 'setname')) {
+	  let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
 client.user.setUsername(argresult).then
     message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
 return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
 } else
   if (message.content.startsWith(adminprefix + 'setavatar')) {
+	  let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
 client.user.setAvatar(argresult);
   message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
       } else     
 if (message.content.startsWith(adminprefix + 'setT')) {
+	let mod_role = message.guild.roles.find('name', 'TW');
+if (!message.member.roles.has(mod_role.id)) return;
   client.user.setGame(argresult, "https://www.twitch.tv/idk");
     message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
 }
 
 });
+
+client.on('message' , message => {
+
+    if (message.content === ".دعوه") {
+        if(!message.channel.guild) return message.reply('**الآمر فقط في السيرفرات**');
+     const embed = new Discord.RichEmbed()
+ .setColor("RANDOM")
+ .setThumbnail(client.user.avatarURL)     
+ .setDescription("Add me" + `
+ **
+رابط البوت |  https://discordapp.com/api/oauth2/authorize?client_id=429761300823015425&permissions=121109569&scope=bot
+ **
+`);
+  message.author.sendEmbed(embed);
+   }
+});
+
+
 
 client.on("message", message => {
  if (message.content === `${prefix}`) {
