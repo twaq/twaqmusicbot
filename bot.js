@@ -98,7 +98,7 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 	} else if (command === `تخطي`) {
 		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
 		if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لتجآوزه');
-		serverQueue.connection.dispatcher.end('تم تجآوز هذآ المقطع');
+		serverQueue.connection.dispatcher.end('تم التخطي!');
 		return undefined;
 	} else if (command === `وقف`) {
 		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
@@ -108,7 +108,7 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 		return undefined;
 	} else if (command === `صوت`) {
 		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
-		if (!serverQueue) return msg.channel.send('لا يوجد شيء شغآل.');
+		if (!serverQueue) return msg.channel.send('لا يوجد اغنية.');
 		if (!args[1]) return msg.channel.send(`:loud_sound: مستوى الصوت **${serverQueue.volume}**`);
 		serverQueue.volume = args[1];
 		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 50);
@@ -119,7 +119,7 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 	.setDescription(`:notes: الان يتم تشغيل : **${serverQueue.songs[0].title}**`)
 		return msg.channel.sendEmbed(embedNP);
 	} else if (command === `قائمة`) {
-		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
+		if (!serverQueue) return msg.channel.send('لا يوجد موسيقى في القائمة.');
 		let index = 0;
 		const embedqu = new Discord.RichEmbed()
 .setDescription(`**Songs Queue**
@@ -137,7 +137,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-			return msg.channel.send('تم الايقاف المؤقت !');
+			return msg.channel.send('تم  !');
 		}
 		return msg.channel.send('لا يوجد شيء حالي في العمل.');
 	}
