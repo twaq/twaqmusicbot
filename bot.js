@@ -207,7 +207,7 @@ function play(guild, song) {
 }
 
 client.on('message', message => {
-	var prefix = "tt";
+	var prefix = "tw";
   if (!message.content.startsWith(prefix)) return;
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
@@ -230,7 +230,7 @@ if (message.content.startsWith(prefix + 'setavatar')) {//تغير صورة ال�
 });
 
 
-var prefix = "tt";
+var prefix = "!!!!";
 
 client.on('message', message => {
   if (!message.content.startsWith(prefix)) return;
