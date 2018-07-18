@@ -206,28 +206,53 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
 }
 
-const adminprefix = "!!!";
-const devs = ['274923685985386496'];
 client.on('message', message => {
-  var argresult = message.content.split(` `).slice(1).join(' ');
-    if (!devs.includes(message.author.id)) return;
-    
-if (message.content.startsWith(adminprefix + 'setgame')) {
+	var prefix = "tt";
+  if (!message.content.startsWith(prefix)) return;
+  var args = message.content.split(' ').slice(1);
+  var argresult = args.join(' ');
+  if (message.author.id !== '413293362918195201') return;
+
+
+if (message.content.startsWith(prefix + 'setname')) { //تغير اسم البوت
+          client.user.setUsername(argresult);
+          message.channel.send(` \`${argresult}\` : done `).then(msg => msg.delete(6000))
+          }
+ else 
+if (message.content.startsWith(prefix + 'setavatar')) {//تغير صورة البوت 
+          client.user.setAvatar(argresult);
+          message.channel.send(`\`${argresult}\` : done `).then(msg => msg.delete(6000))
+  
+
+
+
+}
+});
+
+
+var prefix = "tt";
+
+client.on('message', message => {
+  if (!message.content.startsWith(prefix)) return;
+  var args = message.content.split(' ').slice(1);
+  var argresult = args.join(' ');
+  if (message.author.id !== '413293362918195201') return;
+
+if (message.content.startsWith(prefix + 'p')) {
   client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
+    message.channel.sendMessage(`**:white_check_mark:  : ${argresult}**`)
 } else 
-  if (message.content.startsWith(adminprefix + 'setname')) {
-client.user.setUsername(argresult).then
-    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
-return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
-} else
-  if (message.content.startsWith(adminprefix + 'setavatar')) {
-client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-      } else     
-if (message.content.startsWith(adminprefix + 'setT')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
+if (message.content.startsWith(prefix + 'w')) {
+client.user.setActivity(argresult, {type:'WATCHING'});
+    message.channel.sendMessage(`**:white_check_mark:  : ${argresult}**`)
+} else 
+if (message.content.startsWith(prefix + 'l')) {
+client.user.setActivity(argresult, {type:'LISTENING'});
+    message.channel.sendMessage(`**:white_check_mark:  : ${argresult}**`)
+} else 
+if (message.content.startsWith(prefix + 's')) {
+  client.user.setGame(argresult, "https://www.twitch.tv/idk%22");
+    message.channel.sendMessage(`**:white_check_mark:  : ${argresult}**`)
 }
 
 });
