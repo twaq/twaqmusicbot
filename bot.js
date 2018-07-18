@@ -25,7 +25,7 @@ client.on('ready', () => {
     client.user.setStatus("idle")
 });
 
-const prefix = "##"
+const prefix = "!!"
 client.on('message', async msg => { 
 	if (msg.author.bot) return undefined;
 	if (!msg.content.startsWith(prefix)) return undefined;
@@ -35,7 +35,7 @@ client.on('message', async msg => {
 	const serverQueue = queue.get(msg.guild.id);
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
-	if (command === `شغل`) {
+	if (command === `play`) {
 		const voiceChannel = msg.member.voiceChannel;
 		if (!voiceChannel) return msg.channel.send('يجب ان تكون في روم صوتي .');
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
@@ -95,18 +95,18 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 
 			return handleVideo(video, msg, voiceChannel);
 		}
-	} else if (command === `تخطي`) {
+	} else if (command === `skip`) {
 		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
 		if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لتجآوزه');
 		serverQueue.connection.dispatcher.end('تم تجآوز هذآ المقطع');
 		return undefined;
-	} else if (command === `وقف`) {
+	} else if (command === `stop`) {
 		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
 		if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لإيقآفه');
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('تم الايقاف');
 		return undefined;
-	} else if (command === `صوت`) {
+	} else if (command === `vol`) {
 		if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
 		if (!serverQueue) return msg.channel.send('لا يوجد شيء شغآل.');
 		if (!args[1]) return msg.channel.send(`:loud_sound: مستوى الصوت **${serverQueue.volume}**`);
@@ -118,7 +118,7 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 		const embedNP = new Discord.RichEmbed()
 	.setDescription(`:notes: الان يتم تشغيل : **${serverQueue.songs[0].title}**`)
 		return msg.channel.sendEmbed(embedNP);
-	} else if (command === `قائمه`) {
+	} else if (command === `queue`) {
 		if (!serverQueue) return msg.channel.send('لا يوجد شيء حالي ف العمل.');
 		let index = 0;
 		const embedqu = new Discord.RichEmbed()
@@ -126,14 +126,14 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 **الان يتم تشغيل** ${serverQueue.songs[0].title}`)
 		return msg.channel.sendEmbed(embedqu);
-	} else if (command === `ايقاف`) {
+	} else if (command === `pause`) {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
 			return msg.channel.send('تم إيقاف الموسيقى مؤقتا!');
 		}
 		return msg.channel.send('لا يوجد شيء حالي ف العمل.');
-	} else if (command === "كمل") {
+	} else if (command === "resume") {
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
@@ -206,8 +206,8 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
 }
 
-const adminprefix = "###";
-const devs = ['413293362918195201'];
+const adminprefix = "!!!";
+const devs = ['274923685985386496'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
@@ -232,24 +232,6 @@ if (message.content.startsWith(adminprefix + 'setT')) {
 
 });
 
-client.on('message' , message => {
-
-    if (message.content === ".دعوه") {
-        if(!message.channel.guild) return message.reply('**الآمر فقط في السيرفرات**');
-     const embed = new Discord.RichEmbed()
- .setColor("RANDOM")
- .setThumbnail(client.user.avatarURL)     
- .setDescription("Add me" + `
- **
-رابط البوت |  https://discordapp.com/api/oauth2/authorize?client_id=429761300823015425&permissions=121109569&scope=bot
- **
-`);
-  message.author.sendEmbed(embed);
-   }
-});
-
-
-
 client.on("message", message => {
  if (message.content === `${prefix}`) {
   const embed = new Discord.RichEmbed() 
@@ -269,5 +251,3 @@ ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
     
    }
    }); 
-   
-client.login(process.env.BOT_TOKEN);
