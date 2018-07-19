@@ -21,7 +21,7 @@ npm install queue
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     console.log(`in ${client.guilds.size} servers `)
-    console.log(`[Codes] ${client.users.size}`)
+    console.log(`[owner!TWAQ.] ${client.users.size}`)
     client.user.setStatus("idle")
 });
 
@@ -71,7 +71,7 @@ client.on('message', async msg => {
 			        .setDescription(`**اختر رقم المقطع** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 
-					.setFooter("CODES")
+					.setFooter("TW.")
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 					
 					// eslint-disable-next-line max-depth
@@ -137,7 +137,7 @@ ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
-			return msg.channel.send('تم  !');
+			return msg.channel.send('تم✅');
 		}
 		return msg.channel.send('لا يوجد شيء حالي في العمل.');
 	}
@@ -207,7 +207,7 @@ function play(guild, song) {
 }
 
 client.on('message', message => {
-	var prefix = "tw";
+	var prefix = "!!!!";
   if (!message.content.startsWith(prefix)) return;
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
