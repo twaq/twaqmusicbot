@@ -218,7 +218,7 @@ if (message.content.startsWith(prefix + 'setavatar')) {//تغير صورة ال�
 
 
 client.on('message', message => {
- var prefix = "!!!!";
+ var prefix = "!!";
   if (!message.content.startsWith(prefix)) return;
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
@@ -232,7 +232,7 @@ if (message.content.startsWith(prefix + 'w')) {
 client.user.setActivity(argresult, {type:'WATCHING'});
     message.channel.sendMessage(`**:white_check_mark:  : ${argresult}**`)
 } else 
-if (message.content.startsWith(prefix + 'l')) {
+if (message.content.startsWith(prefix + 'play')) {
 client.user.setActivity(argresult, {type:'LISTENING'});
     message.channel.sendMessage(`**:white_check_mark:  : ${argresult}**`)
 } else 
