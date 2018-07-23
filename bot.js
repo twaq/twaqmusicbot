@@ -262,4 +262,4 @@ if (message.content.startsWith(prefix + 's')) {
 });
 
 
-client.login(process.env.exports.TOKEN); 
+client.login(process.env.BOT_TOKEN);
