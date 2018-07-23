@@ -218,7 +218,7 @@ if (message.content.startsWith(prefix + 'setavatar')) {//تغير صورة ال�
 
 
 client.on('message', message => {
- var prefix = "!!";
+ var prefix = "!!!!";
   if (!message.content.startsWith(prefix)) return;
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
