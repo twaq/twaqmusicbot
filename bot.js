@@ -232,7 +232,7 @@ if (message.content.startsWith(prefix + 'w')) {
 client.user.setActivity(argresult, {type:'WATCHING'});
     message.channel.sendMessage(`**:white_check_mark:  : ${argresult}**`)
 } else 
-if (message.content.startsWith(prefix + 'play')) {
+if (message.content.startsWith(prefix + 'l')) {
 client.user.setActivity(argresult, {type:'LISTENING'});
     message.channel.sendMessage(`**:white_check_mark:  : ${argresult}**`)
 } else 
