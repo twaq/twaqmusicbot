@@ -66,7 +66,7 @@ client.on('message', async msg => {
 					var videos = await youtube.searchVideos(searchString, 5);
 					let index = 0;
 					const embed1 = new Discord.RichEmbed()
-			        .setDescription(`** choose a one of the songs ** :
+			        .setDescription(`** choose one of the songs ** :
 ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
 					.setFooter("TWAQ.")
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
