@@ -1,11 +1,4 @@
 const Discord = require("discord.js");
-const ytdl = require("ytdl-core");
-const { Client, Util } = require('discord.js');
-const getYoutubeID = require('get-youtube-id');
-const fetchVideoInfo = require('youtube-info');
-const YouTube = require('simple-youtube-api');
-const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
-const queue = new Map();
 const client = new Discord.Client();
 
 /*
@@ -15,59 +8,8 @@ npm install ytdl-core
 npm install get-youtube-id
 npm install youtube-info
 npm install simple-youtube-api
-npm install queue
-*/
-
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setStatus("idle")
-
-	
-	
-const prefix = "!!"
-client.on('message', async msg => {
-	if (msg.author.bot) return undefined;
-	if (!msg.content.startsWith(prefix)) return undefined;
-	const args = msg.content.split(' ');
-	const searchString = args.slice(1).join(' ');
-	const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
-	const serverQueue = queue.get(msg.guild.id);
-	let command = msg.content.toLowerCase().split(" ")[0];
-	command = command.slice(prefix.length)
-	if (command === `play`) {
-		const voiceChannel = msg.member.voiceChannel;
-		if (!voiceChannel) return msg.channel.send('you have to be in a voice channel.');
-		const permissions = voiceChannel.permissionsFor(msg.client.user);
-		if (!permissions.has('CONNECT')) {
-			return msg.channel.send('i dont have permissions to concat');
-		}
-		if (!permissions.has('SPEAK')) {
-			return msg.channel.send('i dont have permissions to speak');
-		}
-
-		if (!permissions.has('EMBED_LINKS')) {
-			return msg.channel.sendMessage("**i dont have embed_links permissions **")
-		}
-
-		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-			const playlist = await youtube.getPlaylist(url);
-			const videos = await playlist.getVideos();
-			for (const video of Object.values(videos)) {
-				const video2 = await youtube.getVideoByID(video.id); 
-				await handleVideo(video2, msg, voiceChannel, true); 
-			}
-			return msg.channel.send(` **${playlist.title}** sond add to the queue`);
-		} else {
-			try {
-
-				var video = await youtube.getVideo(url);
-			} catch (error) {
-				try {
-					var videos = await youtube.searchVideos(searchString, 5);
-					let index = 0;
-					const embed1 = new Discord.RichEmbed()
-			        .setDescription(`** choose one of the songs ** :
-${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
+npm install queue    console.log(`Logged in as ${client.user.tag}!`);
+    client.user.setSta **] \`${video2.title}\``).join('\n')}`)
 					.setFooter("TWAQ.")
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 					
